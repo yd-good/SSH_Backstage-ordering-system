@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="u.com.entity">
+    <!--name 实体类的 包名+ 类名       table数据库的表名   -->
+    <class name="User" table="user">
+        <!-- name对应实体类的属性id column对应的是数据库中字段id -->
+        <!--主键映射-->
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <!--非主键映射-->
+        <property name="email" type="java.lang.String">
+            <column name="email" length="16"></column>
+        </property>
+        <property name="passWord" type="java.lang.String">
+            <column name="password" length="32"></column>
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="userName" length="16"></column>
+        </property>
+    </class>
+
+</hibernate-mapping>

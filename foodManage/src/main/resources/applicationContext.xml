@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--       读取配置文件-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!--配置c3p0资源文件-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbcUrl}"></property>
+        <property name="driverClass" value="${driverClass}"></property>
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="initialPoolSize" value="${initialPoolSize}"></property>
+        <property name="maxPoolSize" value="${maxPoolSize}"></property>
+        <property name="minPoolSize" value="${minPoolSize}"></property>
+        <!--一次同时获取的连接数-->
+        <property name="acquireIncrement" value="3"></property>
+        <!--最大空闲时间：如果超过最大空闲时间还没有响应那么就断开连接,设置为1800秒-->
+        <property name="maxIdleTime" value="1800"></property>
+    </bean>
+    <!--    sessionFactory配置-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <property name="mappingLocations">
+            <list>
+               <value>classpath:u/com/entity/User.hbm.xml</value>
+                <value>classpath:table/com/entity/Table.hbm.xml</value>
+                <value>classpath:dishes/com/entity/Dishes.hbm.xml</value>
+                <value>classpath:foodType/com/entity/FoodType.hbm.xml</value>
+                <value>classpath:role/com/entity/Role.hbm.xml</value>
+                <value>classpath:u/com/entity/UserRole.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--    事务的配置-->
+    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!--事物通知-->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"></tx:method>
+            <tx:method name="list*" read-only="true"></tx:method>
+            <tx:method name="get*" read-only="true"></tx:method>
+            <tx:method name="*" rollback-for="Throwable"></tx:method>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--aop配置事务类-->
+    <aop:config>
+        <aop:pointcut id="serviceOperation" expression="bean(*Service)"></aop:pointcut><!--扫描一切以service结尾的-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"></aop:advisor>
+    </aop:config>
+    <!--    所有业务dao的parent-->
+    <bean id="baseDao" abstract="true">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!--    核心代码块-->
+    <import resource="classpath:yd/com/core/config/core-spring.xml"></import>
+</beans>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="tableAction" extends="struts-default" strict-method-invocation="false" namespace="/">
+      <action name="table_*" class="table.com.action.TableAction" method="{1}">
+          <result name="list">/sys/boardList.jsp</result>
+      </action>
+    </package>
+</struts>

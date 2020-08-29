@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="role.com.entity">
+    <!--name 实体类的 包名+ 类名       table数据库的表名   -->
+    <class name="Role" table="role">
+        <!-- name对应实体类的属性id column对应的是数据库中字段id -->
+        <!--主键映射-->
+        <id name="role_Id" type="java.lang.String">
+            <column name="role_Id" length="32"></column>
+            <generator class="uuid"></generator>
+        </id>
+        <!--非主键映射-->
+        <property name="role_Name" type="java.lang.String">
+            <column name="role_Name" length="32"></column>
+        </property>
+        <property name="role_right" type="java.lang.String">
+            <column name="role_right" length="32"></column>
+        </property>
+    </class>
+
+</hibernate-mapping>

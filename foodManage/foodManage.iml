@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet __external-system-id="Maven" type="web" name="Web">
+      <facet type="Struts2" name="Struts 2">
+        <configuration>
+          <fileset id="s2fileset" name="My Fileset" removed="false">
+            <file>file://$MODULE_DIR$/src/main/resources/struts.xml</file>
+            <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-spring-plugin/2.5.10/struts2-spring-plugin-2.5.10.jar!/struts-plugin.xml</file>
+            <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-core/2.5.20/struts2-core-2.5.20.jar!/struts-default.xml</file>
+            <file>file://$MODULE_DIR$/src/main/src/u/com/config/user-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/src/table/com/config/table-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/src/dishes/com/config/dishes-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/src/foodType/com/config/foodType-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/src/yd/com/core/config/core-struts.xml</file>
+          </fileset>
+          <propertiesKeys disabled="false" />
+        </configuration>
+      </facet>
+    </facet>
+  </component>
+</module>

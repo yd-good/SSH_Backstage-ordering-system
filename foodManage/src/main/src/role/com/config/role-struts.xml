@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="user" extends="struts-default" strict-method-invocation="false">
+      <action name="user_*" class="u.com.action.UserAction" method="{1}">
+          <result name="login">/pages/info/all-admin-login.html</result>
+          <result name="success" type="redirect">/sys/index.jsp</result>
+          <result name="userList">/sys/userList.jsp</result>
+      </action>
+    </package>
+</struts>

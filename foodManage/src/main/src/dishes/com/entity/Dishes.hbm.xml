@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="dishes.com.entity">
+    <!--name 实体类的 包名+ 类名       table数据库的表名   -->
+    <class name="Dishes" table="dishes">
+        <!-- name对应实体类的属性id column对应的是数据库中字段id -->
+        <!--主键映射-->
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32"></column>
+            <generator class="uuid"></generator>
+        </id>
+        <!--非主键映射-->
+        <property name="foodName" type="java.lang.String">
+            <column name="foodName" length="16"></column>
+        </property>
+        <property name="foodPrice" type="double">
+            <column name="foodPrice"></column>
+        </property>
+        <property name="memberPrice" type="double">
+            <column name="memberPrice"></column>
+        </property>
+        <property name="introduction" type="java.lang.String">
+            <column name="introduction" length="100"></column>
+        </property>
+        <property name="img" type="java.lang.String">
+            <column name="img" length="100"></column>
+        </property>
+        <many-to-one name="foodType" column="foodType_id" class="foodType.com.entity.FoodType" lazy="false"></many-to-one>
+    </class>
+
+</hibernate-mapping>

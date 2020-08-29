@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+         <!--禁止动态方法访问-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+         <!--配置成开发模式(会将报错信息反映到页面)-->
+    <constant name="struts.devMode" value="true"></constant>
+         <!--配置拓展名为action,必须要有action才能访问-->
+    <constant name="struts.action.extension" value="action"></constant>
+         <!--把主题配置成simple,不要struts标签在翻译成html标签时自动外加一些我们不想要的标签-->
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <include file="u/com/config/user-struts.xml"></include>
+    <include file="table/com/config/table-struts.xml"></include>
+    <include file="dishes/com/config/dishes-struts.xml"></include>
+    <include file="foodType/com/config/foodType-struts.xml"></include>
+
+</struts>

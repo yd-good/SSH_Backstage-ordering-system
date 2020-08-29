@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--name 实体类的 包名+ 类名       table数据库的表名   -->
+    <class name="u.com.entity.UserRole" table="user_role">
+      <composite-id name="userRoleId" class="u.com.entity.UserRoleId">
+          <key-many-to-one name="role" class="role.com.entity.Role" lazy="false">
+              <column name="role_Id"></column>
+          </key-many-to-one>
+          <key-property name="user_Id" type="java.lang.String">
+              <column name="user_Id" length="32"></column>
+          </key-property>
+      </composite-id>
+    </class>
+
+</hibernate-mapping>

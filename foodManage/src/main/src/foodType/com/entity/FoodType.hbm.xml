@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="foodType.com.entity">
+    <!--name 实体类的 包名+ 类名       table数据库的表名   -->
+    <class name="FoodType" table="foodType">
+        <!-- name对应实体类的属性id column对应的是数据库中字段id -->
+        <!--主键映射-->
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32"></column>
+            <generator class="uuid"></generator>
+        </id>
+        <!--非主键映射-->
+        <property name="foodName" type="java.lang.String">
+            <column name="foodName" length="16"></column>
+        </property>
+<!--        inverse="true-->
+       <set name="dishes" cascade="save-update,delete" lazy="false" >
+           <key column="foodType_id"></key>
+           <one-to-many class="dishes.com.entity.Dishes"></one-to-many>
+       </set>
+    </class>
+
+</hibernate-mapping>
